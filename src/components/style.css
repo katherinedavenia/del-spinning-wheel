@@ -1,0 +1,27 @@
+/* navbar */
+
+.navbar-item {
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.pages-button {
+    cursor: pointer;
+}
+
+.pages-button:hover {
+    color: #98c34b;
+    transition: 300ms;
+}
+
+.home-button:hover {
+    color: gray;
+    transition: 300ms;
+}
+
+.draw-button:hover {
+    opacity: 0.7;
+    transition: 300ms ease-in-out;
+}
