@@ -1,14 +1,16 @@
+import { Button } from '@mui/material';
 import React from 'react';
 import './style.css';
 
 const DrawButton = ({ label, onClick }) => (
-    <button
+    <Button
         className='draw-button'
         style={{ 
-            width: 270,
+            width: 100,
             height: 55,
-            borderRadius: 30,
+            borderRadius: 15,
             fontSize: 18,
+            fontWeight: 600,
             color: 'white',
             backgroundImage: 'linear-gradient(#98c34b, #086b3b)',
             border: '1px solid white',
@@ -16,7 +18,7 @@ const DrawButton = ({ label, onClick }) => (
         onClick={onClick}
     >
         {label}
-    </button>
+    </Button>
 );
 
 export default DrawButton;

@@ -1,203 +1,428 @@
 import React, { useState } from 'react'
-import WheelComponent from 'react-wheel-of-prizes';
+import { Wheel } from 'react-custom-roulette'
+import '../style.css';
+import DrawButton from '../DrawButton';
 
-const SpinningWheel = ({ size, style, onSpinFinish, selectedCountry, selectedOffering, selectedEmployee }) => {
-  const countries = [
-    'Indonesia',
-    'Malaysia',
-    'Singapore',
-    'Vietnam',
-    'Phillipines',
-    'Hongkong',
-  ];
+const countries = [
+    { option: 'Brunei', style: { backgroundColor: '#797d62' } },
+    { option: 'Indonesia', style: { backgroundColor: '#9b9b7a' } },
+    { option: 'Malaysia', style: { backgroundColor: '#baa587' } },
+    { option: 'Myanmar', style: { backgroundColor: '#d9ae94' } },
+    { option: 'Phillipines', style: { backgroundColor: '#ddbea9' } },
+    { option: 'Singapore', style: { backgroundColor: '#f1dca7' } },
+    { option: 'Thailand', style: { backgroundColor: '#e8ac65' } },
+    { option: 'Vietnam', style: { backgroundColor: '#997b66' } },
+];
 
-  const offerings = [
-    { name: 'AI&D', country: 'Indonesia' },
-    { name: 'AI&D', country: 'Malaysia' },
-    { name: 'AI&D', country: 'Singapore' },
-    { name: 'AI&D', country: 'Vietnam' },
-    { name: 'AI&D', country: 'Phillipines' },
-    { name: 'AI&D', country: 'Hongkong' },
-    { name: 'Finance', country: 'Indonesia' },
-    { name: 'Finance', country: 'Malaysia' },
-    { name: 'Finance', country: 'Singapore' },
-    { name: 'Finance', country: 'Vietnam' },
-    { name: 'Finance', country: 'Phillipines' },
-    { name: 'Finance', country: 'Hongkong' },
-    { name: 'IT', country: 'Indonesia' },
-    { name: 'IT', country: 'Malaysia' },
-    { name: 'IT', country: 'Singapore' },
-    { name: 'IT', country: 'Vietnam' },
-    { name: 'IT', country: 'Phillipines' },
-    { name: 'IT', country: 'Hongkong' },
+
+
+const offerings = [
+    { option: 'Offering1', country: 'Brunei', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering2', country: 'Brunei', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering1', country: 'Indonesia', style: { backgroundColor: '#dde5b6' } },
+    { option: 'Offering2', country: 'Indonesia', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering3', country: 'Indonesia', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering4', country: 'Indonesia', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering5', country: 'Indonesia', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering6', country: 'Indonesia', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering7', country: 'Indonesia', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering8', country: 'Indonesia', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering9', country: 'Indonesia', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering10', country: 'Indonesia', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering11', country: 'Indonesia', style: { backgroundColor: '#dde5b6' } },
+    { option: 'Offering12', country: 'Indonesia', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering13', country: 'Indonesia', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering14', country: 'Indonesia', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering15', country: 'Indonesia', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering16', country: 'Indonesia', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering17', country: 'Indonesia', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering18', country: 'Indonesia', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering19', country: 'Indonesia', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering20', country: 'Indonesia', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering21', country: 'Indonesia', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering22', country: 'Indonesia', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering1', country: 'Malaysia', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering2', country: 'Malaysia', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering3', country: 'Malaysia', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering4', country: 'Malaysia', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering5', country: 'Malaysia', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering6', country: 'Malaysia', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering7', country: 'Malaysia', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering8', country: 'Malaysia', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering9', country: 'Malaysia', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering10', country: 'Malaysia', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering11', country: 'Malaysia', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering12', country: 'Malaysia', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering13', country: 'Malaysia', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering14', country: 'Malaysia', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering15', country: 'Malaysia', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering16', country: 'Malaysia', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering17', country: 'Malaysia', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering18', country: 'Malaysia', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering19', country: 'Malaysia', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering20', country: 'Malaysia', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering21', country: 'Malaysia', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering22', country: 'Malaysia', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering1', country: 'Myanmar', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering2', country: 'Myanmar', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering3', country: 'Myanmar', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering4', country: 'Myanmar', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering5', country: 'Myanmar', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering1', country: 'Phillipines', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering2', country: 'Phillipines', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering3', country: 'Phillipines', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering4', country: 'Phillipines', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering5', country: 'Phillipines', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering6', country: 'Phillipines', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering7', country: 'Phillipines', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering8', country: 'Phillipines', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering9', country: 'Phillipines', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering10', country: 'Phillipines', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering11', country: 'Phillipines', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering12', country: 'Phillipines', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering13', country: 'Phillipines', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering14', country: 'Phillipines', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering15', country: 'Phillipines', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Cust Strategy AP & Design', country: 'Phillipines', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering17', country: 'Phillipines', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering18', country: 'Phillipines', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering19', country: 'Phillipines', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering20', country: 'Phillipines', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering1', country: 'Singapore', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering2', country: 'Singapore', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering3', country: 'Singapore', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering4', country: 'Singapore', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering5', country: 'Singapore', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering6', country: 'Singapore', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering7', country: 'Singapore', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering8', country: 'Singapore', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering9', country: 'Singapore', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering10', country: 'Singapore', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering11', country: 'Singapore', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering12', country: 'Singapore', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering13', country: 'Singapore', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering14', country: 'Singapore', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering15', country: 'Singapore', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering16', country: 'Singapore', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering17', country: 'Singapore', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering18', country: 'Singapore', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering19', country: 'Singapore', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering20', country: 'Singapore', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering21', country: 'Singapore', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering22', country: 'Singapore', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering23', country: 'Singapore', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering24', country: 'Singapore', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering25', country: 'Singapore', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering26', country: 'Singapore', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering27', country: 'Singapore', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering28', country: 'Singapore', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering29', country: 'Singapore', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering30', country: 'Singapore', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering31', country: 'Singapore', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering1', country: 'Thailand', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering2', country: 'Thailand', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering3', country: 'Thailand', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering4', country: 'Thailand', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering5', country: 'Thailand', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering6', country: 'Thailand', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering7', country: 'Thailand', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering8', country: 'Thailand', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering9', country: 'Thailand', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering10', country: 'Thailand', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering11', country: 'Thailand', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering12', country: 'Thailand', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering13', country: 'Thailand', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering14', country: 'Thailand', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering15', country: 'Thailand', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering16', country: 'Thailand', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering17', country: 'Thailand', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering18', country: 'Thailand', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering19', country: 'Thailand', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering20', country: 'Thailand', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering21', country: 'Thailand', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering22', country: 'Thailand', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering23', country: 'Thailand', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering24', country: 'Thailand', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering1', country: 'Vietnam', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering2', country: 'Vietnam', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering3', country: 'Vietnam', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering4', country: 'Vietnam', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering5', country: 'Vietnam', style: { backgroundColor: '#d4e09b' } },
+    { option: 'Offering6', country: 'Vietnam', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering7', country: 'Vietnam', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering8', country: 'Vietnam', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering9', country: 'Vietnam', style: { backgroundColor: '#a98467' } },
+    { option: 'Offering10', country: 'Vietnam', style: { backgroundColor: '#a47148' } },
+    { option: 'Offering11', country: 'Vietnam', style: { backgroundColor: '#d4a276' } },
+    { option: 'Offering12', country: 'Vietnam', style: { backgroundColor: '#f6f4d2' } },
+    { option: 'Offering13', country: 'Vietnam', style: { backgroundColor: '#f0ead2' } },
+    { option: 'Offering14', country: 'Vietnam', style: { backgroundColor: '#d4e09b' } }, 
+    { option: 'Offering15', country: 'Vietnam', style: { backgroundColor: '#cbdfbd' } },
+    { option: 'Offering16', country: 'Vietnam', style: { backgroundColor: '#adc178' } },
+    { option: 'Offering17', country: 'Vietnam', style: { backgroundColor: '#f19c79' } },
+    { option: 'Offering18', country: 'Vietnam', style: { backgroundColor: '#a98467' } },
   ];
 
   const employees = [
-    { name: 'Kevin', offering: 'AI&D', country: 'Indonesia' },
-    { name: 'Vira', offering: 'AI&D', country: 'Indonesia' },
-    { name: 'Ara', offering: 'AI&D', country: 'Indonesia' },
-    { name: 'Ura', offering: 'AI&D', country: 'Indonesia' },
-    { name: 'Victor', offering: 'AI&D', country: 'Malaysia'  },
-    { name: 'Joji', offering: 'AI&D', country: 'Malaysia'  },
-    { name: 'Joje', offering: 'AI&D', country: 'Malaysia'  },
-    { name: 'Firas', offering: 'AI&D', country: 'Malaysia' },
-    { name: 'Aul', offering: 'AI&D', country: 'Singapore'},
-    { name: 'Aulah', offering: 'AI&D', country: 'Singapore'},
-    { name: 'Ervira', offering: 'AI&D', country: 'Singapore'},
-    { name: 'Husband', offering: 'AI&D', country: 'Singapore' },
-    { name: 'Yoyo', offering: 'AI&D', country: 'Vietnam' },
-    { name: 'Luis', offering: 'AI&D', country: 'Vietnam' },
-    { name: 'Luisah', offering: 'AI&D', country: 'Vietnam' },
-    { name: 'Yeye', offering: 'AI&D', country: 'Vietnam' },
-    { name: 'Hayha', offering: 'AI&D', country: 'Phillipines' },
-    { name: 'Haha', offering: 'AI&D', country: 'Phillipines' },
-    { name: 'Yaya', offering: 'AI&D', country: 'Phillipines' },
-    { name: 'Yiyi', offering: 'AI&D', country: 'Phillipines' },
-    { name: 'Lala', offering: 'AI&D', country: 'Hongkong'  },
-    { name: 'Jemo', offering: 'AI&D', country: 'Hongkong'  },
-    { name: 'Jemy', offering: 'AI&D', country: 'Hongkong'  },
-    { name: 'Lolo', offering: 'AI&D', country: 'Hongkong'  },
-    { name: 'Ketrin', offering: 'Finance', country: 'Indonesia' },
-    { name: 'Akbar', offering: 'Finance', country: 'Indonesia' },
-    { name: 'Viras', offering: 'Finance', country: 'Indonesia' },
-    { name: 'Akbarin', offering: 'Finance', country: 'Indonesia' },
-    { name: 'Joseph Victor', offering: 'Finance', country: 'Malaysia' },
-    { name: 'Babeh Victor', offering: 'Finance', country: 'Malaysia' },
-    { name: 'Babeh', offering: 'Finance', country: 'Malaysia' },
-    { name: 'Eythleina', offering: 'Finance', country: 'Malaysia' },
-    { name: 'Pazzia', offering: 'Finance', country: 'Singapore'},
-    { name: 'Laura', offering: 'Finance', country: 'Singapore'},
-    { name: 'Cinta', offering: 'Finance', country: 'Singapore'},
-    { name: 'Joko', offering: 'Finance', country: 'Singapore' },
-    { name: 'Baba', offering: 'Finance', country: 'Vietnam' },
-    { name: 'Honga', offering: 'Finance', country: 'Vietnam' },
-    { name: 'Hongi', offering: 'Finance', country: 'Vietnam' },
-    { name: 'Bebeb', offering: 'Finance', country: 'Vietnam' },
-    { name: 'Bobo', offering: 'Finance', country: 'Phillipines' },
-    { name: 'Tante', offering: 'Finance', country: 'Phillipines' },
-    { name: 'Om', offering: 'Finance', country: 'Phillipines' },
-    { name: 'Bibi', offering: 'Finance', country: 'Phillipines' },
-    { name: 'Sierra', offering: 'Finance', country: 'Hongkong'  },
-    { name: 'Bubu', offering: 'Finance', country: 'Hongkong'  },
-    { name: 'Wati', offering: 'Finance', country: 'Hongkong'  },
-    { name: 'Baby', offering: 'Finance', country: 'Hongkong'  },
-    { name: 'Silvi', offering: 'IT', country: 'Indonesia' },
-    { name: 'Reza', offering: 'IT', country: 'Indonesia' },
-    { name: 'Gunawan', offering: 'IT', country: 'Indonesia' },
-    { name: 'Via', offering: 'IT', country: 'Indonesia' },
-    { name: 'Bong Chandra', offering: 'IT', country: 'Malaysia' },
-    { name: 'Bong', offering: 'IT', country: 'Malaysia' },
-    { name: 'Billy', offering: 'IT', country: 'Malaysia' },
-    { name: 'Valen', offering: 'IT', country: 'Malaysia' },
-    { name: 'Ado', offering: 'IT', country: 'Singapore'},
-    { name: 'Alda', offering: 'IT', country: 'Singapore'},
-    { name: 'Aldanira', offering: 'IT', country: 'Singapore'},
-    { name: 'Asen', offering: 'IT', country: 'Singapore' },
-    { name: 'Sisi', offering: 'IT', country: 'Vietnam' },
-    { name: 'Cahaya', offering: 'IT', country: 'Vietnam' },
-    { name: 'Aya', offering: 'IT', country: 'Vietnam' },
-    { name: 'Sese', offering: 'IT', country: 'Vietnam' },
-    { name: 'Soso', offering: 'IT', country: 'Phillipines' },
-    { name: 'Siti', offering: 'IT', country: 'Phillipines' },
-    { name: 'Billie Eilish', offering: 'IT', country: 'Phillipines' },
-    { name: 'Sasa', offering: 'IT', country: 'Phillipines' },
-    { name: 'Wiku', offering: 'IT', country: 'Hongkong'  },
-    { name: 'Fafa', offering: 'IT', country: 'Hongkong'  },
-    { name: 'Naufal', offering: 'IT', country: 'Hongkong'  },
-    { name: 'Fifi', offering: 'IT', country: 'Hongkong'  },
+    { option: 'my name is...', offering: 'Offering1', country: 'Brunei', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering2', country: 'Brunei', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering1', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering2', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering3', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering4', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering5', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering6', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering7', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering8', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering9', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering10', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering11', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering12', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering13', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering14', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering15', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering16', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering17', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering18', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering19', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering20', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering21', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering22', country: 'Indonesia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering1', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering2', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering3', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering4', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering5', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering6', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering7', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering8', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering9', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering10', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering11', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering12', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering13', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering14', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering15', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering16', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering17', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering18', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering19', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering20', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering21', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering22', country: 'Malaysia', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering1', country: 'Myanmar', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering2', country: 'Myanmar', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering3', country: 'Myanmar', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering4', country: 'Myanmar', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering5', country: 'Myanmar', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering1', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering2', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering3', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering4', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering5', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering6', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering7', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering8', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering9', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering10', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering11', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering12', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering13', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering14', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering15', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering16', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering17', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering18', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering19', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering20', country: 'Phillipines', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering1', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering2', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering3', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering4', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering5', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering6', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering7', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering8', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering9', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering10', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering11', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering12', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering13', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering14', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering15', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering16', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering17', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering18', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering19', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering20', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering21', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering22', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering23', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering24', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering25', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering26', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering27', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering28', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering29', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering30', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering31', country: 'Singapore', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering1', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering2', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering3', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering4', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering5', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering6', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering7', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering8', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering9', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering10', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering11', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering12', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering13', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering14', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering15', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering16', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering17', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering18', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering19', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering20', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering21', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering22', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering23', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering24', country: 'Thailand', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering1', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering2', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering2', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering3', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering4', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering5', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering6', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering7', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering8', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering9', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering10', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering11', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering12', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering13', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering14', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering15', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering16', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering17', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
+    { option: 'my name is...', offering: 'Offering18', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
   ];
 
-  const countriesColors = [
-    '#797d62',
-    '#9b9b7a',
-    '#d9ae94',
-    '#b7b7a4',
-    '#f1dca7',
-    '#ffcb69',
-    '#d08c60',
-    '#997b66',
-    '#dda15e',
-    '#bc6c25'
-  ];
+const SpinningWheel = ({ onSpinFinish, selectedCountry, selectedOffering, selectedEmployee }) => {
+  const [mustSpin, setMustSpin] = useState(false);
+  const [prizeNumber, setPrizeNumber] = useState(0);
 
-  const offeringsColors = [
-    '#e8a598',
-    '#ffcdb2',
-    '#fec5bb',
-    '#fcd5ce',
-    '#e5989b',
-    '#f9e5d8',
-    '#f9dcc4',
-    '#fcd2af',
-    '#fec89a',
-    '#ffb4a2'
-  ];
-
-  const employeesColor = [
-    '#eddcd2',
-    '#fff1e6',
-    '#fde2e4',
-    '#4cc9f0',
-    '#bcd4e6',
-    '#dbe7e4',
-    '#d6e2e9',
-    '#bcd4e6',
-    '#99c1de',
-  ];
+  const handleSpinClick = () => {
+    const newPrizeNumber = Math.floor(Math.random() * countries.length)
+    setPrizeNumber(newPrizeNumber)
+    setMustSpin(true)
+  };
 
   const firstStep = !selectedCountry && !selectedOffering && !selectedEmployee;
   const secondStep = selectedCountry && !selectedOffering && !selectedEmployee;
   const thirdStep = selectedCountry && selectedOffering && !selectedEmployee;
 
+  const dataOfferingsFiltered = offerings.filter(o => o.country === selectedCountry).map(o => ( { option: o.option, style: o.style } ))
+  const dataEmployeesFiltered = employees.filter(o => o.offering === selectedOffering && o.country === selectedCountry).map(e => ( { option: e.option, style: e.style } ))
+
+  function definedFontSize(employee) {
+    if(employee.length > 80){
+        return 6
+    } if(employee.length < 80 && employee.length > 60){
+        return 7
+    } if(employee.length < 60 && employee.length > 20){
+        return 10
+    } else {
+        return 12
+    }
+  }
+
+  function definedTextDistance(employee) {
+    if(employee.length > 80){
+        return 80
+    } if(employee.length < 80 && employee.length > 40){
+        return 75
+    } else {
+        return 65
+    }
+  }
+
   return (
-    <div style={style}>
-      {firstStep && (
-        <WheelComponent
-          segments={countries}
-          segColors={countriesColors}
-          onFinished={(value) => onSpinFinish(value)}
-          primaryColor='white'
-          contrastColor='black'
-          buttonText='DRAW'
-          isOnlyOnce={false}
-          size={size}
-          upDuration={100}
-          downDuration={1000}
-          fontFamily='Arial'
-        />
-      )}
-      {secondStep && (
-        <WheelComponent
-          segments={offerings.filter(o => o.country === selectedCountry).map(o => o.name)}
-          segColors={offeringsColors}
-          onFinished={(value) => onSpinFinish(value)}
-          primaryColor='white'
-          contrastColor='black'
-          buttonText='DRAW'
-          isOnlyOnce={false}
-          size={size}
-          upDuration={100}
-          downDuration={1000}
-          fontFamily='Arial'
-        />
-      )}
-      {thirdStep && (
-        <WheelComponent
-          segments={employees.filter(o => o.offering === selectedOffering && o.country === selectedCountry).map(e => e.name)}
-          segColors={employeesColor}
-          onFinished={(value) => onSpinFinish(value)}
-          primaryColor='white'
-          contrastColor='black'
-          buttonText='DRAW'
-          isOnlyOnce={false}
-          size={size}
-          upDuration={100}
-          downDuration={1000}
-          fontFamily='Arial'
-        />
-      )}
-    </div>
-  )
-}
+      <div>
+            {firstStep &&
+                <>
+                    <Wheel
+                        mustStartSpinning={mustSpin}
+                        prizeNumber={prizeNumber}
+                        data={countries}
+                        onStopSpinning={() => {
+                            setMustSpin(false)
+                            onSpinFinish(countries[prizeNumber].option)
+                        }}
+                        outerBorderWidth={2}
+                        outerBorderColor="white"
+                        innerRadius={20}
+                        innerBorderWidth={10}
+                        innerBorderColor="white"
+                        radiusLineColor="white"
+                        fontSize={14}
+                        textDistance={70}
+                        radiusLineWidth={1}
+                    />
+                    <DrawButton label="SPIN" onClick={handleSpinClick} />
+                </>
+            }
+            {secondStep && (
+                <>
+                    <Wheel
+                        mustStartSpinning={mustSpin}
+                        prizeNumber={prizeNumber}
+                        data={dataOfferingsFiltered}
+                        onStopSpinning={() => {
+                            setMustSpin(false)
+                            onSpinFinish(offerings[prizeNumber].option)
+                        }}
+                        outerBorderWidth={2}
+                        outerBorderColor="white"
+                        innerRadius={20}
+                        innerBorderWidth={10}
+                        innerBorderColor="white"
+                        radiusLineColor="white"
+                        fontSize={11}
+                        textDistance={60}
+                        radiusLineWidth={1}
+                    />
+                    <DrawButton label="SPIN" onClick={handleSpinClick} />
+                </>
+            )}
+            {thirdStep && (
+                <>
+                    <Wheel
+                        mustStartSpinning={mustSpin}
+                        prizeNumber={prizeNumber}
+                        data={dataEmployeesFiltered}
+                        onStopSpinning={() => {
+                            setMustSpin(false)
+                            onSpinFinish(employees[prizeNumber].option)
+                        }}
+                        outerBorderWidth={2}
+                        outerBorderColor="white"
+                        innerRadius={20}
+                        innerBorderWidth={10}
+                        innerBorderColor="white"
+                        radiusLineColor="white"
+                        fontSize={definedFontSize(dataEmployeesFiltered)}
+                        textDistance={definedTextDistance(dataEmployeesFiltered)}
+                        radiusLineWidth={1}
+                    />
+                    <DrawButton label="SPIN" onClick={handleSpinClick} />
+                </>
+            )}
+        </div>
+    );
+};
 
 export default SpinningWheel;

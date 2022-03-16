@@ -21,7 +21,19 @@
     transition: 300ms;
 }
 
+.draw-button {
+    transform: translate(-50px, -70px);
+}
+
 .draw-button:hover {
     opacity: 0.7;
     transition: 300ms ease-in-out;
+}
+
+.bhdLno {
+    max-width: 730px !important;
+    width: 730px !important;
+    max-height: 730px !important;
+    height: 730px !important;
+    transform: translate(-50px, 40px) !important;
 }
