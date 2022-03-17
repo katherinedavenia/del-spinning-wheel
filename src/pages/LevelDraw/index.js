@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import PageWrapper from '../../components/PageWrapper';
 import '../../components/style.css';
 import WinnerFrame from '../../assets/winner_frame.gif';
-import SpinningWheel from '../../components/SpinningWheel';
+import SpinningWheelLevel from '../../components/SpinningWheelLevel';
 import { Box, Typography } from '@mui/material';
 
-const LevelDraw = () => {
+const OfferingDraw = () => {
     const [ selectedCountry, setSelectedCountry ] = useState(null);
-    const [ selectedOffering, setSelectedOffering ] = useState(null);
+    const [ selectedLevel, setSelectedLevel ] = useState(null);
     const [ selectedEmployee, setSelectedEmployee ] = useState(null);
 
     const [ winners, setWinners ] = useState({});
 
-    const firstStep = !selectedCountry && !selectedOffering && !selectedEmployee;
-    const secondStep = selectedCountry && !selectedOffering && !selectedEmployee;
-    const thirdStep = selectedCountry && selectedOffering && !selectedEmployee;
+    const firstStep = !selectedCountry && !selectedLevel && !selectedEmployee;
+    const secondStep = selectedCountry && !selectedLevel && !selectedEmployee;
+    const thirdStep = selectedCountry && selectedLevel && !selectedEmployee;
 
     const onSpinFinish = (value) => {
         let updatedValue = {};
@@ -35,7 +35,7 @@ const LevelDraw = () => {
                 ...updatedValue
             }));
             setTimeout(() => {
-                setSelectedOffering(value);
+                setSelectedLevel(value);
             }, 2000);
         } else if (thirdStep) {
             updatedValue = {'name': value};
@@ -46,7 +46,7 @@ const LevelDraw = () => {
             setTimeout(() => {
                 setSelectedEmployee(value);
                 setSelectedCountry(null);
-                setSelectedOffering(null);
+                setSelectedLevel(null);
                 setSelectedEmployee(null);
                 setWinners({});
             }, 10000);
@@ -136,10 +136,10 @@ const LevelDraw = () => {
                     </Box>
                 </Box>
                 <Box style={{  width: '50%' }}>
-                    <SpinningWheel
+                    <SpinningWheelLevel
                         onSpinFinish={(value) => onSpinFinish(value)}
                         selectedCountry={selectedCountry}
-                        selectedOffering={selectedOffering}
+                        selectedLevel={selectedLevel}
                         selectedEmployee={selectedEmployee}
                     />
                 </Box>
@@ -148,4 +148,4 @@ const LevelDraw = () => {
     )
 };
 
-export default LevelDraw;
+export default OfferingDraw;

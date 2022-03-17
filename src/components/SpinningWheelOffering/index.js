@@ -14,8 +14,6 @@ const countries = [
     { option: 'Vietnam', style: { backgroundColor: '#997b66' } },
 ];
 
-
-
 const offerings = [
     { option: 'Offering1', country: 'Brunei', style: { backgroundColor: '#f6f4d2' } },
     { option: 'Offering2', country: 'Brunei', style: { backgroundColor: '#f0ead2' } },
@@ -61,8 +59,8 @@ const offerings = [
     { option: 'Offering18', country: 'Malaysia', style: { backgroundColor: '#cbdfbd' } },
     { option: 'Offering19', country: 'Malaysia', style: { backgroundColor: '#adc178' } },
     { option: 'Offering20', country: 'Malaysia', style: { backgroundColor: '#f19c79' } },
-    { option: 'Offering21', country: 'Malaysia', style: { backgroundColor: '#a98467' } },
-    { option: 'Offering22', country: 'Malaysia', style: { backgroundColor: '#a47148' } },
+    { option: 'ai d', country: 'Malaysia', style: { backgroundColor: '#a98467' } },
+    { option: 'finance', country: 'Malaysia', style: { backgroundColor: '#a47148' } },
     { option: 'Offering1', country: 'Myanmar', style: { backgroundColor: '#d4a276' } },
     { option: 'Offering2', country: 'Myanmar', style: { backgroundColor: '#f6f4d2' } },
     { option: 'Offering3', country: 'Myanmar', style: { backgroundColor: '#f0ead2' } },
@@ -161,7 +159,7 @@ const offerings = [
     { option: 'Offering16', country: 'Vietnam', style: { backgroundColor: '#adc178' } },
     { option: 'Offering17', country: 'Vietnam', style: { backgroundColor: '#f19c79' } },
     { option: 'Offering18', country: 'Vietnam', style: { backgroundColor: '#a98467' } },
-  ];
+];
 
   const employees = [
     { option: 'my name is...', offering: 'Offering1', country: 'Brunei', style: { backgroundColor: '#DDDDDD' } },
@@ -311,22 +309,15 @@ const offerings = [
     { option: 'my name is...', offering: 'Offering18', country: 'Vietnam', style: { backgroundColor: '#DDDDDD' } },
   ];
 
-const SpinningWheel = ({ onSpinFinish, selectedCountry, selectedOffering, selectedEmployee }) => {
+const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering, selectedEmployee }) => {
   const [mustSpin, setMustSpin] = useState(false);
-  const [prizeNumber, setPrizeNumber] = useState(0);
-
-  const handleSpinClick = () => {
-    const newPrizeNumber = Math.floor(Math.random() * countries.length)
-    setPrizeNumber(newPrizeNumber)
-    setMustSpin(true)
-  };
 
   const firstStep = !selectedCountry && !selectedOffering && !selectedEmployee;
   const secondStep = selectedCountry && !selectedOffering && !selectedEmployee;
   const thirdStep = selectedCountry && selectedOffering && !selectedEmployee;
 
   const dataOfferingsFiltered = offerings.filter(o => o.country === selectedCountry).map(o => ( { option: o.option, style: o.style } ))
-  const dataEmployeesFiltered = employees.filter(o => o.offering === selectedOffering && o.country === selectedCountry).map(e => ( { option: e.option, style: e.style } ))
+  const dataEmployeesFiltered = employees.filter(e => e.offering === selectedOffering && e.country === selectedCountry).map(e => ( { option: e.option, style: e.style } ))
 
   function definedFontSize(employee) {
     if(employee.length > 80){
@@ -338,7 +329,7 @@ const SpinningWheel = ({ onSpinFinish, selectedCountry, selectedOffering, select
     } else {
         return 12
     }
-  }
+  };
 
   function definedTextDistance(employee) {
     if(employee.length > 80){
@@ -348,7 +339,23 @@ const SpinningWheel = ({ onSpinFinish, selectedCountry, selectedOffering, select
     } else {
         return 65
     }
-  }
+  };
+
+  const [prizeNumber, setPrizeNumber] = useState(1);
+  const [prizeNumberOffering, setPrizeNumberOffering] = useState(1);
+  const [prizeNumberEmployee, setPrizeNumberEmployee] = useState(1);
+  const [isSpinning, setIsSpinning] = useState(false);
+
+  const handleSpinClick = () => {
+    const newPrizeNumber = Math.floor(Math.random() * countries.length);
+    const newPrizeNumberOffering = Math.floor(Math.random() * dataOfferingsFiltered.length);
+    const newPrizeNumberEmployee = Math.floor(Math.random() * dataEmployeesFiltered.length);
+    setPrizeNumber(newPrizeNumber);
+    setPrizeNumberOffering(newPrizeNumberOffering);
+    setPrizeNumberEmployee(newPrizeNumberEmployee);
+    setMustSpin(true);
+    setIsSpinning(true);
+  };
 
   return (
       <div>
@@ -360,7 +367,7 @@ const SpinningWheel = ({ onSpinFinish, selectedCountry, selectedOffering, select
                         data={countries}
                         onStopSpinning={() => {
                             setMustSpin(false)
-                            onSpinFinish(countries[prizeNumber].option)
+                            onSpinFinish(countries[prizeNumber].option);
                         }}
                         outerBorderWidth={2}
                         outerBorderColor="white"
@@ -372,18 +379,18 @@ const SpinningWheel = ({ onSpinFinish, selectedCountry, selectedOffering, select
                         textDistance={70}
                         radiusLineWidth={1}
                     />
-                    <DrawButton label="SPIN" onClick={handleSpinClick} />
+                    <DrawButton disabled={isSpinning} label="SPIN" onClick={handleSpinClick} />
                 </>
             }
             {secondStep && (
                 <>
                     <Wheel
-                        mustStartSpinning={mustSpin}
-                        prizeNumber={prizeNumber}
+                        mustStartSpinning={true}
+                        prizeNumber={prizeNumberOffering}
                         data={dataOfferingsFiltered}
                         onStopSpinning={() => {
-                            setMustSpin(false)
-                            onSpinFinish(offerings[prizeNumber].option)
+                            setMustSpin(false);
+                            onSpinFinish(dataOfferingsFiltered[prizeNumberOffering].option);
                         }}
                         outerBorderWidth={2}
                         outerBorderColor="white"
@@ -395,18 +402,21 @@ const SpinningWheel = ({ onSpinFinish, selectedCountry, selectedOffering, select
                         textDistance={60}
                         radiusLineWidth={1}
                     />
-                    <DrawButton label="SPIN" onClick={handleSpinClick} />
+                    <DrawButton disabled={isSpinning} label="SPIN" onClick={handleSpinClick} />
                 </>
             )}
             {thirdStep && (
                 <>
                     <Wheel
-                        mustStartSpinning={mustSpin}
-                        prizeNumber={prizeNumber}
+                        mustStartSpinning={true}
+                        prizeNumber={prizeNumberEmployee}
                         data={dataEmployeesFiltered}
                         onStopSpinning={() => {
-                            setMustSpin(false)
-                            onSpinFinish(employees[prizeNumber].option)
+                            setMustSpin(false);
+                            onSpinFinish(dataEmployeesFiltered[prizeNumberEmployee].option);
+                            setTimeout(() => {
+                                setIsSpinning(false);
+                            }, 10000);
                         }}
                         outerBorderWidth={2}
                         outerBorderColor="white"
@@ -418,11 +428,11 @@ const SpinningWheel = ({ onSpinFinish, selectedCountry, selectedOffering, select
                         textDistance={definedTextDistance(dataEmployeesFiltered)}
                         radiusLineWidth={1}
                     />
-                    <DrawButton label="SPIN" onClick={handleSpinClick} />
+                    <DrawButton disabled={isSpinning} label="SPIN" onClick={handleSpinClick} />
                 </>
             )}
         </div>
     );
 };
 
-export default SpinningWheel;
+export default SpinningWheelOffering;

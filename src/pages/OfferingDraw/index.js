@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PageWrapper from '../../components/PageWrapper';
 import '../../components/style.css';
 import WinnerFrame from '../../assets/winner_frame.gif';
-import SpinningWheel from '../../components/SpinningWheel';
+import SpinningWheelOffering from '../../components/SpinningWheelOffering';
 import { Box, Typography } from '@mui/material';
 
 const OfferingDraw = () => {
@@ -136,7 +136,7 @@ const OfferingDraw = () => {
                     </Box>
                 </Box>
                 <Box style={{  width: '50%' }}>
-                     <SpinningWheel
+                     <SpinningWheelOffering
                         onSpinFinish={(value) => onSpinFinish(value)}
                         selectedCountry={selectedCountry}
                         selectedOffering={selectedOffering}
