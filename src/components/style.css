@@ -1,10 +1,11 @@
 /* navbar */
 
 .navbar-item {
-    font-size: 16px;
+    font-size: 2vh;
     font-weight: 400;
     color: white;
     letter-spacing: 1px;
+    padding-top: 10px;
 }
 
 .pages-button {

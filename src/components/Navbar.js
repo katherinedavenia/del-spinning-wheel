@@ -54,7 +54,7 @@ const Navbar = () => {
                         </Box>
                     </Grid>
                     <Grid item xs={3} sx={{ display: 'flex', justifyContent: 'end' }}>
-                        <Typography className='navbar-item'>
+                        <Typography className='navbar-item' sx={{ fontSize: '2vh' }}>
                             AHM 2022
                         </Typography>
                     </Grid>
