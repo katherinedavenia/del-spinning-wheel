@@ -45,9 +45,9 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
 
   const [isSpinning, setIsSpinning] = useState(false);
 
-  const newPrizeNumber = Math.floor(Math.random() * countries.length);
-  const newPrizeNumberOffering = Math.floor(Math.random() * dataOfferingsFiltered.length);
-  const newPrizeNumberEmployee = Math.floor(Math.random() * dataEmployeesFiltered.length);
+  const prizeNumber = Math.floor(Math.random() * countries.length);
+  const prizeNumberOffering = Math.floor(Math.random() * dataOfferingsFiltered.length);
+  const prizeNumberEmployee = Math.floor(Math.random() * dataEmployeesFiltered.length);
   
   const handleSpinClick = () => {
     setMustSpin(true);
@@ -60,11 +60,11 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
                 <>
                     <Wheel
                         mustStartSpinning={mustSpin}
-                        prizeNumber={newPrizeNumber}
+                        prizeNumber={prizeNumber}
                         data={countries}
                         onStopSpinning={() => {
                             setMustSpin(false)
-                            onSpinFinish(countries[newPrizeNumber].option);
+                            onSpinFinish(countries[prizeNumber].option);
                         }}
                         outerBorderWidth={2}
                         outerBorderColor="white"
@@ -83,11 +83,11 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
                 <>
                     <Wheel
                         mustStartSpinning={true}
-                        prizeNumber={newPrizeNumberOffering}
+                        prizeNumber={prizeNumberOffering}
                         data={dataOfferingsFiltered}
                         onStopSpinning={() => {
                             setMustSpin(false);
-                            onSpinFinish(dataOfferingsFiltered[newPrizeNumberOffering].option);
+                            onSpinFinish(dataOfferingsFiltered[prizeNumberOffering].option);
                         }}
                         outerBorderWidth={2}
                         outerBorderColor="white"
@@ -106,11 +106,11 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
                 <>
                     <Wheel
                         mustStartSpinning={true}
-                        prizeNumber={newPrizeNumberEmployee}
+                        prizeNumber={prizeNumberEmployee}
                         data={dataEmployeesFiltered}
                         onStopSpinning={() => {
                             setMustSpin(false);
-                            onSpinFinish(dataEmployeesFiltered[newPrizeNumberEmployee].option);
+                            onSpinFinish(dataEmployeesFiltered[prizeNumberEmployee].option);
                             setTimeout(() => {
                                 setIsSpinning(false);
                             }, 10000);

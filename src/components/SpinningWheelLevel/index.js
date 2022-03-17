@@ -41,18 +41,13 @@ const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, sele
     }
   };
 
-  const [prizeNumber, setPrizeNumber] = useState(1);
-  const [prizeNumberLevel, setPrizeNumberLevel] = useState(1);
-  const [prizeNumberEmployee, setPrizeNumberEmployee] = useState(1);
   const [isSpinning, setIsSpinning] = useState(false);
 
+  const prizeNumber = Math.floor(Math.random() * countries.length);
+  const prizeNumberLevel = Math.floor(Math.random() * dataLevelsFiltered.length);
+  const prizeNumberEmployee = Math.floor(Math.random() * dataEmployeesFiltered.length);
+  
   const handleSpinClick = () => {
-    const newPrizeNumber = Math.floor(Math.random() * countries.length);
-    const newPrizeNumberLevel = Math.floor(Math.random() * dataLevelsFiltered.length);
-    const newPrizeNumberEmployee = Math.floor(Math.random() * dataEmployeesFiltered.length);
-    setPrizeNumber(newPrizeNumber);
-    setPrizeNumberLevel(newPrizeNumberLevel);
-    setPrizeNumberEmployee(newPrizeNumberEmployee);
     setMustSpin(true);
     setIsSpinning(true);
   };
