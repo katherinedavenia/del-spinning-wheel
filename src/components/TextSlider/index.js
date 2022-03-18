@@ -2,7 +2,8 @@ import React from "react"
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import "./style.css"
-import { Box } from "@mui/material"
+import { Box, Typography } from "@mui/material"
+import PublicSharpIcon from '@mui/icons-material/PublicSharp';
 
 const animation = { duration: 50000, easing: (t) => t }
 
@@ -30,22 +31,40 @@ const TextSlider = () => {
   return (
     <Box ref={sliderRef} className="keen-slider">
       <Box className="keen-slider__slide number-slide1" sx={sx}>
-        DELOITE AHM 2022
+        <PublicSharpIcon fontSize="small" sx={{ marginRight: '5px' }}/> 
+        <Typography>
+          DELOITTE AHM 2022
+        </Typography>
       </Box>
       <Box className="keen-slider__slide number-slide2" sx={sx}>
-        DELOITE AHM 2022
+        <PublicSharpIcon fontSize="small" sx={{ marginRight: '5px' }}/> 
+        <Typography>
+          DELOITTE AHM 2022
+        </Typography>
       </Box>
       <Box className="keen-slider__slide number-slide3" sx={sx}>
-        DELOITE AHM 2022
+        <PublicSharpIcon fontSize="small" sx={{ marginRight: '5px' }}/> 
+        <Typography>
+          DELOITTE AHM 2022
+        </Typography>
       </Box>
       <Box className="keen-slider__slide number-slide4" sx={sx}>
-        DELOITE AHM 2022
+        <PublicSharpIcon fontSize="small" sx={{ marginRight: '5px' }}/> 
+        <Typography>
+          DELOITTE AHM 2022
+        </Typography>
       </Box>
       <Box className="keen-slider__slide number-slide5" sx={sx}>
-        DELOITE AHM 2022
+        <PublicSharpIcon fontSize="small" sx={{ marginRight: '5px' }}/> 
+        <Typography>
+          DELOITTE AHM 2022
+        </Typography>
       </Box>
       <Box className="keen-slider__slide number-slide6" sx={sx}>
-        DELOITE AHM 2022
+        <PublicSharpIcon fontSize="small" sx={{ marginRight: '5px' }}/> 
+        <Typography>
+          DELOITTE AHM 2022
+        </Typography>
       </Box>
     </Box>
   );

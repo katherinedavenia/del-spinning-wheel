@@ -5,6 +5,7 @@ import WinnerFrame from '../../assets/winner-frame.gif';
 import SpinningWheelOffering from '../../components/SpinningWheelOffering';
 import { Box, Typography } from '@mui/material';
 import DeloitteCircle from '../../assets/deloitte-circle.png';
+import iWatch from '../../assets/iwatch.png';
 
 const OfferingDraw = () => {
     const [ selectedCountry, setSelectedCountry ] = useState(null);
@@ -63,7 +64,7 @@ const OfferingDraw = () => {
                 }}
             >
                 <Box
-                    style={{
+                    sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
@@ -72,35 +73,51 @@ const OfferingDraw = () => {
                         padding: '80px 0 0 60px',
                     }}
                 >
-                    <Typography
-                        style={{
-                            fontSize: 35,
-                            fontWeight: 400,
-                            lineHeight: 1.2,
-                            color: 'white',
-                            marginBottom: 30,
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
                         }}
                     >
-                        <i>Are you one of our</i> <br />
-                        <b style={{ fontWeight: 700 }}>5 Apple iWatch</b> <i>winners?</i>
-                    </Typography>
+                        <img
+                            src={iWatch}
+                            alt='iWatch'
+                            style={{
+                                height: '130px',
+                                marginRight: '20px'
+                            }}
+                        />
+                        <Typography
+                            sx={{
+                                fontSize: 35,
+                                fontWeight: 400,
+                                lineHeight: 1.2,
+                                color: 'white',
+                                marginBottom: '30px',
+                            }}
+                        >
+                            <i>Are you one of our</i> <br />
+                            <b style={{ fontWeight: 700 }}>5 Apple iWatch</b><br/>
+                            <i>winners?</i>
+                        </Typography>
+                    </Box>
                     <Box 
-                        style={{
+                        sx={{
                             display: 'flex',
                             justifyContent: 'start',
                             alignItems: 'center',
                             flexDirection: 'column',
-                            width: 570,
-                            height: 250,
+                            width: '570px',
+                            height: '250px',
                             backgroundColor: 'lightyellow',
                             border: '15px solid #1fadd8',
-                            borderRadius: 15,
+                            borderRadius: '15px',
                             position: 'relative',
                         }}
                     >
                         <Typography
-                            style={{
-                                fontSize: 28,
+                            sx={{
+                                fontSize: '28px',
                                 fontWeight: 600,
                                 color: 'deepskyblue',
                                 margin: '20px 0 7px 0',
@@ -109,8 +126,8 @@ const OfferingDraw = () => {
                             Congratulations to:
                         </Typography>
                         <Typography 
-                            style={{ 
-                                fontSize: 32, 
+                            sx={{ 
+                                fontSize: '32px', 
                                 marginBottom: 0,
                                 textAlign: 'center',
                                 lineHeight: 1.2,
@@ -128,13 +145,13 @@ const OfferingDraw = () => {
                             style={{
                                 position: 'absolute',
                                 top: -40,
-                                width: 600,
-                                height: 300,
+                                width: '600px',
+                                height: '300px',
                             }}
                         />
                     </Box>
                 </Box>
-                <Box style={{  width: '50%', position: 'relative' }}>
+                <Box sx={{  width: '50%', position: 'relative' }}>
                      <SpinningWheelOffering
                         onSpinFinish={(value) => onSpinFinish(value)}
                         selectedCountry={selectedCountry}
@@ -149,7 +166,7 @@ const OfferingDraw = () => {
                             position: 'absolute',
                             top: 320,
                             left: 240,
-                            width: 150
+                            width: '150px'
                         }}
                     />
                 </Box>

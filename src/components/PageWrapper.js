@@ -3,7 +3,7 @@ import DeloitteBackground from '../assets/deloitte-background.jpg';
 import TextSlider from './TextSlider';
 
 const PageWrapper = ({ children }) => (
-    <Box style={{ backgroundColor: 'black', position: 'relative' }}>
+    <Box sx={{ backgroundColor: 'black', position: 'relative' }}>
         <Box
             sx={{
                 position: 'absolute',
@@ -18,7 +18,7 @@ const PageWrapper = ({ children }) => (
                 sx={{ 
                     display: 'flex',
                     backgroundImage: `url(${DeloitteBackground})`, 
-                    backgroundPosition: '-50px 20px',
+                    backgroundPosition: '-50px 10px',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: '105vw',
                     height: '100vh',
