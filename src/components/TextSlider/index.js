@@ -6,7 +6,7 @@ import { Box } from "@mui/material"
 
 const animation = { duration: 50000, easing: (t) => t }
 
-const BottomSlider = () => {
+const TextSlider = () => {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 5,
@@ -51,4 +51,4 @@ const BottomSlider = () => {
   );
 };
 
-export default BottomSlider;
+export default TextSlider;

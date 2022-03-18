@@ -52,6 +52,11 @@ const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, sele
     setIsSpinning(true);
   };
 
+  const handleSpinResetClick = () => {
+    setMustSpin(true);
+    setIsSpinning(true);
+  };
+
   return (
       <div>
             {firstStep &&
@@ -97,7 +102,6 @@ const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, sele
                         textDistance={60}
                         radiusLineWidth={1}
                     />
-                    <DrawButton disabled={isSpinning} label="SPIN" onClick={handleSpinClick} />
                 </>
             )}
             {thirdStep && (
@@ -109,9 +113,7 @@ const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, sele
                         onStopSpinning={() => {
                             setMustSpin(false);
                             onSpinFinish(dataEmployeesFiltered[prizeNumberEmployee].option);
-                            setTimeout(() => {
-                                setIsSpinning(false);
-                            }, 10000);
+                            setIsSpinning(false);
                         }}
                         outerBorderWidth={2}
                         outerBorderColor="white"
@@ -123,7 +125,7 @@ const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, sele
                         textDistance={definedTextDistance(dataEmployeesFiltered)}
                         radiusLineWidth={1}
                     />
-                    <DrawButton disabled={isSpinning} label="SPIN" onClick={handleSpinClick} />
+                    <DrawButton disabled={isSpinning} label="SPIN" onClick={handleSpinResetClick} />
                 </>
             )}
         </div>

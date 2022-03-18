@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PageWrapper from '../../components/PageWrapper';
 import '../../components/style.css';
-import WinnerFrame from '../../assets/winner_frame.gif';
+import WinnerFrame from '../../assets/winner-frame.gif';
 import SpinningWheelOffering from '../../components/SpinningWheelOffering';
 import { Box, Typography } from '@mui/material';
+import DeloitteCircle from '../../assets/deloitte-circle.png';
 
 const OfferingDraw = () => {
     const [ selectedCountry, setSelectedCountry ] = useState(null);
@@ -43,13 +44,13 @@ const OfferingDraw = () => {
                 ...winners,
                 ...updatedValue
             }));
-            setTimeout(() => {
-                setSelectedEmployee(value);
-                setSelectedCountry(null);
-                setSelectedOffering(null);
-                setSelectedEmployee(null);
-                setWinners({});
-            }, 10000);
+            // setTimeout(() => {
+            //     setSelectedEmployee(value);
+            //     setSelectedCountry(null);
+            //     setSelectedOffering(null);
+            //     setSelectedEmployee(null);
+            //     setWinners({});
+            // }, 10000);
         };
     };
 
@@ -91,7 +92,7 @@ const OfferingDraw = () => {
                             justifyContent: 'start',
                             alignItems: 'center',
                             flexDirection: 'column',
-                            width: 550,
+                            width: 570,
                             height: 250,
                             backgroundColor: 'lightyellow',
                             border: '15px solid #1fadd8',
@@ -129,18 +130,29 @@ const OfferingDraw = () => {
                             style={{
                                 position: 'absolute',
                                 top: -40,
-                                width: 580,
+                                width: 600,
                                 height: 300,
                             }}
                         />
                     </Box>
                 </Box>
-                <Box style={{  width: '50%' }}>
+                <Box style={{  width: '50%', position: 'relative' }}>
                      <SpinningWheelOffering
                         onSpinFinish={(value) => onSpinFinish(value)}
                         selectedCountry={selectedCountry}
                         selectedOffering={selectedOffering}
                         selectedEmployee={selectedEmployee}
+                    />
+                    <img
+                        src={DeloitteCircle}
+                        alt='deloitte'
+                        style={{
+                            zIndex: 500,
+                            position: 'absolute',
+                            top: 320,
+                            left: 240,
+                            width: 150
+                        }}
                     />
                 </Box>
             </Box>

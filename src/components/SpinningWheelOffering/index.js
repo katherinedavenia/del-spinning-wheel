@@ -99,7 +99,6 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
                         textDistance={60}
                         radiusLineWidth={1}
                     />
-                    <DrawButton disabled={isSpinning} label="SPIN" onClick={handleSpinClick} />
                 </>
             )}
             {thirdStep && (
@@ -125,7 +124,6 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
                         textDistance={definedTextDistance(dataEmployeesFiltered)}
                         radiusLineWidth={1}
                     />
-                    <DrawButton disabled={isSpinning} label="SPIN" onClick={handleSpinClick} />
                 </>
             )}
         </div>

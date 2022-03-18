@@ -1,17 +1,24 @@
 import { Box, Container } from '@mui/material';
 import DeloitteBackground from '../assets/deloitte-background.jpg';
-import BottomSlider from './BottomSlider';
-import Navbar from './Navbar';
+import TextSlider from './TextSlider';
 
 const PageWrapper = ({ children }) => (
     <Box style={{ backgroundColor: 'black', position: 'relative' }}>
-        <Navbar />
+        <Box
+            sx={{
+                position: 'absolute',
+                top: 0,
+                width: '100vw',
+            }}
+        >
+            <TextSlider />
+        </Box>
         <Container maxWidth="xl" sx={{ padding: '0 !important' }}>
             <Box 
                 sx={{ 
                     display: 'flex',
                     backgroundImage: `url(${DeloitteBackground})`, 
-                    backgroundPosition: '-50px 30px',
+                    backgroundPosition: '-50px 20px',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: '105vw',
                     height: '100vh',
@@ -35,7 +42,7 @@ const PageWrapper = ({ children }) => (
                 width: '100vw',
             }}
         >
-            <BottomSlider />
+            <TextSlider />
         </Box>
     </Box>
 );
