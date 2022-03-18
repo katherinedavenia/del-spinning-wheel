@@ -9,13 +9,12 @@ import DeloitteCircle from '../../assets/deloitte-circle.png';
 const OfferingDraw = () => {
     const [ selectedCountry, setSelectedCountry ] = useState(null);
     const [ selectedLevel, setSelectedLevel ] = useState(null);
-    const [ selectedEmployee, setSelectedEmployee ] = useState(null);
 
     const [ winners, setWinners ] = useState({});
 
-    const firstStep = !selectedCountry && !selectedLevel && !selectedEmployee;
-    const secondStep = selectedCountry && !selectedLevel && !selectedEmployee;
-    const thirdStep = selectedCountry && selectedLevel && !selectedEmployee;
+    const firstStep = !selectedCountry && !selectedLevel;
+    const secondStep = selectedCountry && !selectedLevel;
+    const thirdStep = selectedCountry && selectedLevel;
 
     const onSpinFinish = (value) => {
         let updatedValue = {};
@@ -44,15 +43,15 @@ const OfferingDraw = () => {
                 ...winners,
                 ...updatedValue
             }));
-            setTimeout(() => {
-                setSelectedEmployee(value);
-                setSelectedCountry(null);
-                setSelectedLevel(null);
-                setSelectedEmployee(null);
-                setWinners({});
-            }, 10000);
         };
     };
+
+    const modifyState = () => {
+        setSelectedCountry(null);
+        setSelectedLevel(null);
+        setWinners({});
+    };
+
 
     return(
         <PageWrapper>
@@ -141,7 +140,8 @@ const OfferingDraw = () => {
                         onSpinFinish={(value) => onSpinFinish(value)}
                         selectedCountry={selectedCountry}
                         selectedLevel={selectedLevel}
-                        selectedEmployee={selectedEmployee}
+                        parentStateModifier={modifyState}
+
                     />
                     <img
                         src={DeloitteCircle}

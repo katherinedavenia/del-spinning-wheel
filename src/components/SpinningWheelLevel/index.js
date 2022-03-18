@@ -4,7 +4,7 @@ import '../style.css';
 import DrawButton from '../DrawButton';
 import { useGetDataLevel } from './data';
 
-const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, selectedEmployee }) => {
+const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, parentStateModifier }) => {
     const {
         countries,
         levels,
@@ -12,9 +12,9 @@ const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, sele
       } = useGetDataLevel();
   const [mustSpin, setMustSpin] = useState(false);
 
-  const firstStep = !selectedCountry && !selectedLevel && !selectedEmployee;
-  const secondStep = selectedCountry && !selectedLevel && !selectedEmployee;
-  const thirdStep = selectedCountry && selectedLevel && !selectedEmployee;
+  const firstStep = !selectedCountry && !selectedLevel;
+  const secondStep = selectedCountry && !selectedLevel;
+  const thirdStep = selectedCountry && selectedLevel;
 
   const dataLevelsFiltered = levels.filter(o => o.country === selectedCountry).map(o => ( { option: o.option, style: o.style } ))
   const dataEmployeesFiltered = employees.filter(e => e.level === selectedLevel && e.country === selectedCountry).map(e => ( { option: e.option, style: e.style } ))
@@ -55,6 +55,7 @@ const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, sele
   const handleSpinResetClick = () => {
     setMustSpin(true);
     setIsSpinning(true);
+    parentStateModifier();
   };
 
   return (
@@ -83,26 +84,24 @@ const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, sele
                 </>
             }
             {secondStep && (
-                <>
-                    <Wheel
-                        mustStartSpinning={true}
-                        prizeNumber={prizeNumberLevel}
-                        data={dataLevelsFiltered}
-                        onStopSpinning={() => {
-                            setMustSpin(false);
-                            onSpinFinish(dataLevelsFiltered[prizeNumberLevel].option);
-                        }}
-                        outerBorderWidth={2}
-                        outerBorderColor="white"
-                        innerRadius={20}
-                        innerBorderWidth={10}
-                        innerBorderColor="white"
-                        radiusLineColor="white"
-                        fontSize={11}
-                        textDistance={60}
-                        radiusLineWidth={1}
-                    />
-                </>
+                <Wheel
+                    mustStartSpinning={true}
+                    prizeNumber={prizeNumberLevel}
+                    data={dataLevelsFiltered}
+                    onStopSpinning={() => {
+                        setMustSpin(false);
+                        onSpinFinish(dataLevelsFiltered[prizeNumberLevel].option);
+                    }}
+                    outerBorderWidth={2}
+                    outerBorderColor="white"
+                    innerRadius={20}
+                    innerBorderWidth={10}
+                    innerBorderColor="white"
+                    radiusLineColor="white"
+                    fontSize={11}
+                    textDistance={60}
+                    radiusLineWidth={1}
+                />
             )}
             {thirdStep && (
                 <>
@@ -125,7 +124,7 @@ const SpinningWheelLevel = ({ onSpinFinish, selectedCountry, selectedLevel, sele
                         textDistance={definedTextDistance(dataEmployeesFiltered)}
                         radiusLineWidth={1}
                     />
-                    <DrawButton disabled={isSpinning} label="SPIN" onClick={handleSpinResetClick} />
+                    <DrawButton disabled={isSpinning} label="SPIN AGAIN" onClick={handleSpinResetClick} />
                 </>
             )}
         </div>

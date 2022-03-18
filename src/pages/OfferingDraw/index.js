@@ -9,13 +9,12 @@ import DeloitteCircle from '../../assets/deloitte-circle.png';
 const OfferingDraw = () => {
     const [ selectedCountry, setSelectedCountry ] = useState(null);
     const [ selectedOffering, setSelectedOffering ] = useState(null);
-    const [ selectedEmployee, setSelectedEmployee ] = useState(null);
 
     const [ winners, setWinners ] = useState({});
 
-    const firstStep = !selectedCountry && !selectedOffering && !selectedEmployee;
-    const secondStep = selectedCountry && !selectedOffering && !selectedEmployee;
-    const thirdStep = selectedCountry && selectedOffering && !selectedEmployee;
+    const firstStep = !selectedCountry && !selectedOffering;
+    const secondStep = selectedCountry && !selectedOffering;
+    const thirdStep = selectedCountry && selectedOffering;
 
     const onSpinFinish = (value) => {
         let updatedValue = {};
@@ -44,14 +43,13 @@ const OfferingDraw = () => {
                 ...winners,
                 ...updatedValue
             }));
-            // setTimeout(() => {
-            //     setSelectedEmployee(value);
-            //     setSelectedCountry(null);
-            //     setSelectedOffering(null);
-            //     setSelectedEmployee(null);
-            //     setWinners({});
-            // }, 10000);
         };
+    };
+
+    const modifyState = () => {
+        setSelectedCountry(null);
+        setSelectedOffering(null);
+        setWinners({});
     };
 
     return(
@@ -141,7 +139,7 @@ const OfferingDraw = () => {
                         onSpinFinish={(value) => onSpinFinish(value)}
                         selectedCountry={selectedCountry}
                         selectedOffering={selectedOffering}
-                        selectedEmployee={selectedEmployee}
+                        parentStateModifier={modifyState}
                     />
                     <img
                         src={DeloitteCircle}

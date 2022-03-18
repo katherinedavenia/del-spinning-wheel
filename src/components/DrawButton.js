@@ -6,15 +6,16 @@ const DrawButton = ({ label, onClick, disabled }) => (
     <Button
         className='draw-button'
         style={{ 
-            width: 135,
+            width: 165,
             height: 60,
             borderRadius: 20,
-            fontSize: 22,
-            fontWeight: 600,
+            fontSize: 20,
+            fontWeight: 500,
+            lineHeight: 1.1,
             color: 'white',
             backgroundImage:'linear-gradient(#98c34b, #086b3b)',
             border: '1px solid white',
-            transform: 'translate(-225px, -460px)',
+            transform: 'translate(-225px, -465px)',
             display: disabled && 'none',
         }}
         onClick={onClick}

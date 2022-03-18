@@ -4,7 +4,7 @@ import '../style.css';
 import DrawButton from '../DrawButton';
 import { useGetDataOffering } from './data';
 
-const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering, selectedEmployee }) => {
+const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering, parentStateModifier }) => {
     const {
       countries,
       offerings,
@@ -13,9 +13,9 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
 
   const [mustSpin, setMustSpin] = useState(false);
 
-  const firstStep = !selectedCountry && !selectedOffering && !selectedEmployee;
-  const secondStep = selectedCountry && !selectedOffering && !selectedEmployee;
-  const thirdStep = selectedCountry && selectedOffering && !selectedEmployee;
+  const firstStep = !selectedCountry && !selectedOffering;
+  const secondStep = selectedCountry && !selectedOffering;
+  const thirdStep = selectedCountry && selectedOffering;
 
   const dataOfferingsFiltered = offerings.filter(o => o.country === selectedCountry).map(o => ( { option: o.option, style: o.style } ))
   const dataEmployeesFiltered = employees.filter(e => e.offering === selectedOffering && e.country === selectedCountry).map(e => ( { option: e.option, style: e.style } ))
@@ -54,6 +54,12 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
     setIsSpinning(true);
   };
 
+  const handleSpinResetClick = () => {
+    setMustSpin(true);
+    setIsSpinning(true);
+    parentStateModifier();
+  };
+
   return (
       <div>
             {firstStep &&
@@ -80,26 +86,24 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
                 </>
             }
             {secondStep && (
-                <>
-                    <Wheel
-                        mustStartSpinning={true}
-                        prizeNumber={prizeNumberOffering}
-                        data={dataOfferingsFiltered}
-                        onStopSpinning={() => {
-                            setMustSpin(false);
-                            onSpinFinish(dataOfferingsFiltered[prizeNumberOffering].option);
-                        }}
-                        outerBorderWidth={2}
-                        outerBorderColor="white"
-                        innerRadius={20}
-                        innerBorderWidth={10}
-                        innerBorderColor="white"
-                        radiusLineColor="white"
-                        fontSize={11}
-                        textDistance={60}
-                        radiusLineWidth={1}
-                    />
-                </>
+                <Wheel
+                    mustStartSpinning={true}
+                    prizeNumber={prizeNumberOffering}
+                    data={dataOfferingsFiltered}
+                    onStopSpinning={() => {
+                        setMustSpin(false);
+                        onSpinFinish(dataOfferingsFiltered[prizeNumberOffering].option);
+                    }}
+                    outerBorderWidth={2}
+                    outerBorderColor="white"
+                    innerRadius={20}
+                    innerBorderWidth={10}
+                    innerBorderColor="white"
+                    radiusLineColor="white"
+                    fontSize={11}
+                    textDistance={60}
+                    radiusLineWidth={1}
+                />
             )}
             {thirdStep && (
                 <>
@@ -112,7 +116,7 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
                             onSpinFinish(dataEmployeesFiltered[prizeNumberEmployee].option);
                             setTimeout(() => {
                                 setIsSpinning(false);
-                            }, 10000);
+                            }, 5000);
                         }}
                         outerBorderWidth={2}
                         outerBorderColor="white"
@@ -124,6 +128,7 @@ const SpinningWheelOffering = ({ onSpinFinish, selectedCountry, selectedOffering
                         textDistance={definedTextDistance(dataEmployeesFiltered)}
                         radiusLineWidth={1}
                     />
+                    <DrawButton disabled={isSpinning} label="SPIN AGAIN" onClick={handleSpinResetClick} />
                 </>
             )}
         </div>
